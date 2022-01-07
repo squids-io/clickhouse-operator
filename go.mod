@@ -23,13 +23,13 @@ require (
 	gopkg.in/yaml.v2 v2.4.0
 	k8s.io/api v0.21.7
 	k8s.io/apimachinery v0.21.7
-	k8s.io/client-go v0.0.0-00010101000000-000000000000
-	k8s.io/code-generator v0.0.0-00010101000000-000000000000
+	k8s.io/client-go v0.21.7
+	k8s.io/code-generator v0.21.7
 )
 
 replace (
 	k8s.io/api => k8s.io/api v0.21.7
 	k8s.io/apimachinery => k8s.io/apimachinery v0.21.7
-	k8s.io/client-go => k8s.io/client-go v0.21.7
-	k8s.io/code-generator => k8s.io/code-generator v0.21.7
+//k8s.io/client-go => k8s.io/client-go v0.21.7
+//k8s.io/code-generator => k8s.io/code-generator v0.21.7
 )
