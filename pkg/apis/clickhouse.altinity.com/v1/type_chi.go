@@ -21,8 +21,8 @@ import (
 
 	"github.com/imdario/mergo"
 
-	"github.com/altinity/clickhouse-operator/pkg/util"
-	"github.com/altinity/clickhouse-operator/pkg/version"
+	"github.com/squids-io/clickhouse-operator/pkg/util"
+	"github.com/squids-io/clickhouse-operator/pkg/version"
 )
 
 // FillStatus fills .Status

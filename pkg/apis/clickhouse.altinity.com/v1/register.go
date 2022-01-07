@@ -19,7 +19,7 @@ import (
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	clickhousealtinitycom "github.com/altinity/clickhouse-operator/pkg/apis/clickhouse.altinity.com"
+	clickhousealtinitycom "github.com/squids-io/clickhouse-operator/pkg/apis/clickhouse.altinity.com"
 )
 
 // SchemeGroupVersion is group version used to register these objects

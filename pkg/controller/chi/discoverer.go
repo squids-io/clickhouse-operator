@@ -18,10 +18,10 @@ import (
 	"context"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-	log "github.com/altinity/clickhouse-operator/pkg/announcer"
-	chop "github.com/altinity/clickhouse-operator/pkg/apis/clickhouse.altinity.com/v1"
-	chopmodel "github.com/altinity/clickhouse-operator/pkg/model"
-	"github.com/altinity/clickhouse-operator/pkg/util"
+	log "github.com/squids-io/clickhouse-operator/pkg/announcer"
+	chop "github.com/squids-io/clickhouse-operator/pkg/apis/clickhouse.altinity.com/v1"
+	chopmodel "github.com/squids-io/clickhouse-operator/pkg/model"
+	"github.com/squids-io/clickhouse-operator/pkg/util"
 )
 
 func (c *Controller) discovery(ctx context.Context, chi *chop.ClickHouseInstallation) *chopmodel.Registry {

@@ -22,8 +22,8 @@ import (
 	apps "k8s.io/api/apps/v1"
 	"k8s.io/api/core/v1"
 
-	chop "github.com/altinity/clickhouse-operator/pkg/apis/clickhouse.altinity.com/v1"
-	"github.com/altinity/clickhouse-operator/pkg/util"
+	chop "github.com/squids-io/clickhouse-operator/pkg/apis/clickhouse.altinity.com/v1"
+	"github.com/squids-io/clickhouse-operator/pkg/util"
 )
 
 const (

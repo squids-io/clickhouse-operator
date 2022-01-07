@@ -31,11 +31,11 @@ import (
 
 	"github.com/altinity/queue"
 
-	log "github.com/altinity/clickhouse-operator/pkg/announcer"
-	chiv1 "github.com/altinity/clickhouse-operator/pkg/apis/clickhouse.altinity.com/v1"
-	"github.com/altinity/clickhouse-operator/pkg/chop"
-	chopmodel "github.com/altinity/clickhouse-operator/pkg/model"
-	"github.com/altinity/clickhouse-operator/pkg/util"
+	log "github.com/squids-io/clickhouse-operator/pkg/announcer"
+	chiv1 "github.com/squids-io/clickhouse-operator/pkg/apis/clickhouse.altinity.com/v1"
+	"github.com/squids-io/clickhouse-operator/pkg/chop"
+	chopmodel "github.com/squids-io/clickhouse-operator/pkg/model"
+	"github.com/squids-io/clickhouse-operator/pkg/util"
 )
 
 // FinalizerName specifies name of the finalizer to be used with CHI

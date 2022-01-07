@@ -19,8 +19,8 @@ limitations under the License.
 package clickhouse
 
 import (
-	v1 "github.com/altinity/clickhouse-operator/pkg/client/informers/externalversions/clickhouse.altinity.com/v1"
-	internalinterfaces "github.com/altinity/clickhouse-operator/pkg/client/informers/externalversions/internalinterfaces"
+	v1 "github.com/squids-io/clickhouse-operator/pkg/client/informers/externalversions/clickhouse.altinity.com/v1"
+	internalinterfaces "github.com/squids-io/clickhouse-operator/pkg/client/informers/externalversions/internalinterfaces"
 )
 
 // Interface provides access to each of this group's versions.

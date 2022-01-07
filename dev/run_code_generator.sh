@@ -35,7 +35,7 @@ fi
 
 bash "${CODE_GENERATOR_DIR}/generate-groups.sh" \
     all \
-    github.com/altinity/clickhouse-operator/pkg/client \
-    github.com/altinity/clickhouse-operator/pkg/apis \
+    github.com/squids-io/clickhouse-operator/pkg/client \
+    github.com/squids-io/clickhouse-operator/pkg/apis \
     "clickhouse.altinity.com:v1" \
     -o "${SRC_ROOT}/generator"

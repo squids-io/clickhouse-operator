@@ -19,9 +19,9 @@ limitations under the License.
 package fake
 
 import (
-	clientset "github.com/altinity/clickhouse-operator/pkg/client/clientset/versioned"
-	clickhousev1 "github.com/altinity/clickhouse-operator/pkg/client/clientset/versioned/typed/clickhouse.altinity.com/v1"
-	fakeclickhousev1 "github.com/altinity/clickhouse-operator/pkg/client/clientset/versioned/typed/clickhouse.altinity.com/v1/fake"
+	clientset "github.com/squids-io/clickhouse-operator/pkg/client/clientset/versioned"
+	clickhousev1 "github.com/squids-io/clickhouse-operator/pkg/client/clientset/versioned/typed/clickhouse.altinity.com/v1"
+	fakeclickhousev1 "github.com/squids-io/clickhouse-operator/pkg/client/clientset/versioned/typed/clickhouse.altinity.com/v1/fake"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/watch"
 	"k8s.io/client-go/discovery"

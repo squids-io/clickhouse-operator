@@ -20,7 +20,7 @@ import (
 
 	log "github.com/golang/glog"
 
-	"github.com/altinity/clickhouse-operator/pkg/util/runtime"
+	"github.com/squids-io/clickhouse-operator/pkg/util/runtime"
 )
 
 // Announcer handler all log/event/status messages going outside of controller/worker

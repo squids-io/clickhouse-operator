@@ -27,6 +27,6 @@ There were changes in ClickHouseInstallation CRD, so it is recommended to remove
  * Operator now looks at its own namespace if not specified explicitly
  * Enhance multi-thread support for concurrent operations
 
-[a187]: https://github.com/Altinity/clickhouse-operator/pull/187
-[a159]: https://github.com/Altinity/clickhouse-operator/pull/159
+[a187]: https://github.com/squids-io/clickhouse-operator/pull/187
+[a159]: https://github.com/squids-io/clickhouse-operator/pull/159
 

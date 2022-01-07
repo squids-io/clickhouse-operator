@@ -22,8 +22,8 @@ import (
 	"context"
 	"time"
 
-	v1 "github.com/altinity/clickhouse-operator/pkg/apis/clickhouse.altinity.com/v1"
-	scheme "github.com/altinity/clickhouse-operator/pkg/client/clientset/versioned/scheme"
+	v1 "github.com/squids-io/clickhouse-operator/pkg/apis/clickhouse.altinity.com/v1"
+	scheme "github.com/squids-io/clickhouse-operator/pkg/client/clientset/versioned/scheme"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	types "k8s.io/apimachinery/pkg/types"
 	watch "k8s.io/apimachinery/pkg/watch"

@@ -18,9 +18,9 @@ import (
 	"bytes"
 	"fmt"
 
-	chiv1 "github.com/altinity/clickhouse-operator/pkg/apis/clickhouse.altinity.com/v1"
-	xmlbuilder "github.com/altinity/clickhouse-operator/pkg/model/builder/xml"
-	"github.com/altinity/clickhouse-operator/pkg/util"
+	chiv1 "github.com/squids-io/clickhouse-operator/pkg/apis/clickhouse.altinity.com/v1"
+	xmlbuilder "github.com/squids-io/clickhouse-operator/pkg/model/builder/xml"
+	"github.com/squids-io/clickhouse-operator/pkg/util"
 )
 
 const (

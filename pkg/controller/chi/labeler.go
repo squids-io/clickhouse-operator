@@ -22,11 +22,11 @@ import (
 	v13 "k8s.io/api/apps/v1"
 	v12 "k8s.io/api/core/v1"
 
-	log "github.com/altinity/clickhouse-operator/pkg/announcer"
-	chiv1 "github.com/altinity/clickhouse-operator/pkg/apis/clickhouse.altinity.com/v1"
-	"github.com/altinity/clickhouse-operator/pkg/chop"
-	"github.com/altinity/clickhouse-operator/pkg/model"
-	"github.com/altinity/clickhouse-operator/pkg/util"
+	log "github.com/squids-io/clickhouse-operator/pkg/announcer"
+	chiv1 "github.com/squids-io/clickhouse-operator/pkg/apis/clickhouse.altinity.com/v1"
+	"github.com/squids-io/clickhouse-operator/pkg/chop"
+	"github.com/squids-io/clickhouse-operator/pkg/model"
+	"github.com/squids-io/clickhouse-operator/pkg/util"
 )
 
 func (c *Controller) labelMyObjectsTree(ctx context.Context) error {

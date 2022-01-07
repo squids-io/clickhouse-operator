@@ -16,10 +16,10 @@ package model
 
 import (
 	"context"
-	log "github.com/altinity/clickhouse-operator/pkg/announcer"
-	chop "github.com/altinity/clickhouse-operator/pkg/apis/clickhouse.altinity.com/v1"
-	"github.com/altinity/clickhouse-operator/pkg/model/clickhouse"
-	"github.com/altinity/clickhouse-operator/pkg/util"
+	log "github.com/squids-io/clickhouse-operator/pkg/announcer"
+	chop "github.com/squids-io/clickhouse-operator/pkg/apis/clickhouse.altinity.com/v1"
+	"github.com/squids-io/clickhouse-operator/pkg/model/clickhouse"
+	"github.com/squids-io/clickhouse-operator/pkg/util"
 )
 
 // Cluster specifies ClickHouse cluster

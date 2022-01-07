@@ -181,7 +181,7 @@
         {
           "targetBlank": true,
           "title": "metric_fetch_errors",
-          "url": "https://github.com/Altinity/clickhouse-operator/search?q=metric_fetch_errors"
+          "url": "https://github.com/squids-io/clickhouse-operator/search?q=metric_fetch_errors"
         }
       ],
       "mappingType": 1,

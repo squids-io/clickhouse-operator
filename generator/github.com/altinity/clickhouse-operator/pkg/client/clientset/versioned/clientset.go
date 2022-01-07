@@ -21,7 +21,7 @@ package versioned
 import (
 	"fmt"
 
-	clickhousev1 "github.com/altinity/clickhouse-operator/pkg/client/clientset/versioned/typed/clickhouse.altinity.com/v1"
+	clickhousev1 "github.com/squids-io/clickhouse-operator/pkg/client/clientset/versioned/typed/clickhouse.altinity.com/v1"
 	discovery "k8s.io/client-go/discovery"
 	rest "k8s.io/client-go/rest"
 	flowcontrol "k8s.io/client-go/util/flowcontrol"

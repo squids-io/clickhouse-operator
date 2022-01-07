@@ -14,7 +14,7 @@
 
 package model
 
-import "github.com/altinity/clickhouse-operator/pkg/apis/clickhouse.altinity.com/v1"
+import "github.com/squids-io/clickhouse-operator/pkg/apis/clickhouse.altinity.com/v1"
 
 const (
 	xmlTagYandex = "yandex"

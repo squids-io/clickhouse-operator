@@ -21,10 +21,10 @@ import (
 	meta "k8s.io/apimachinery/pkg/apis/meta/v1"
 	kublabels "k8s.io/apimachinery/pkg/labels"
 
-	"github.com/altinity/clickhouse-operator/pkg/apis/clickhouse.altinity.com"
-	chiv1 "github.com/altinity/clickhouse-operator/pkg/apis/clickhouse.altinity.com/v1"
-	"github.com/altinity/clickhouse-operator/pkg/chop"
-	"github.com/altinity/clickhouse-operator/pkg/util"
+	"github.com/squids-io/clickhouse-operator/pkg/apis/clickhouse.altinity.com"
+	chiv1 "github.com/squids-io/clickhouse-operator/pkg/apis/clickhouse.altinity.com/v1"
+	"github.com/squids-io/clickhouse-operator/pkg/chop"
+	"github.com/squids-io/clickhouse-operator/pkg/util"
 )
 
 // Set of kubernetes labels used by the operator

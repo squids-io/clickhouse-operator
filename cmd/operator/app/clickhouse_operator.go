@@ -26,11 +26,11 @@ import (
 
 	kubeinformers "k8s.io/client-go/informers"
 
-	log "github.com/altinity/clickhouse-operator/pkg/announcer"
-	"github.com/altinity/clickhouse-operator/pkg/chop"
-	chopinformers "github.com/altinity/clickhouse-operator/pkg/client/informers/externalversions"
-	"github.com/altinity/clickhouse-operator/pkg/controller/chi"
-	"github.com/altinity/clickhouse-operator/pkg/version"
+	log "github.com/squids-io/clickhouse-operator/pkg/announcer"
+	"github.com/squids-io/clickhouse-operator/pkg/chop"
+	chopinformers "github.com/squids-io/clickhouse-operator/pkg/client/informers/externalversions"
+	"github.com/squids-io/clickhouse-operator/pkg/controller/chi"
+	"github.com/squids-io/clickhouse-operator/pkg/version"
 )
 
 // Prometheus exporter defaults

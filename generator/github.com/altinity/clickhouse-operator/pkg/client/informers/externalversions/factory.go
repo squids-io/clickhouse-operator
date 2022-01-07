@@ -23,9 +23,9 @@ import (
 	sync "sync"
 	time "time"
 
-	versioned "github.com/altinity/clickhouse-operator/pkg/client/clientset/versioned"
-	clickhousealtinitycom "github.com/altinity/clickhouse-operator/pkg/client/informers/externalversions/clickhouse.altinity.com"
-	internalinterfaces "github.com/altinity/clickhouse-operator/pkg/client/informers/externalversions/internalinterfaces"
+	versioned "github.com/squids-io/clickhouse-operator/pkg/client/clientset/versioned"
+	clickhousealtinitycom "github.com/squids-io/clickhouse-operator/pkg/client/informers/externalversions/clickhouse.altinity.com"
+	internalinterfaces "github.com/squids-io/clickhouse-operator/pkg/client/informers/externalversions/internalinterfaces"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"

@@ -7,8 +7,8 @@ ClickHouse Operator creates, configures and manages ClickHouse clusters running 
 [![Docker Pulls](https://img.shields.io/docker/pulls/altinity/clickhouse-operator.svg)](https://hub.docker.com/r/altinity/clickhouse-operator)
 [![Go Report Card](https://goreportcard.com/badge/github.com/altinity/clickhouse-operator)](https://goreportcard.com/report/github.com/altinity/clickhouse-operator)
 [![Go version](https://img.shields.io/github/go-mod/go-version/altinity/clickhouse-operator)](https://img.shields.io/github/go-mod/go-version/altinity/clickhouse-operator)
-[![issues](https://img.shields.io/github/issues/altinity/clickhouse-operator.svg)](https://github.com/altinity/clickhouse-operator/issues)
-[![tags](https://img.shields.io/github/tag/altinity/clickhouse-operator.svg)](https://github.com/altinity/clickhouse-operator/tags)
+[![issues](https://img.shields.io/github/issues/altinity/clickhouse-operator.svg)](https://github.com/squids-io/clickhouse-operator/issues)
+[![tags](https://img.shields.io/github/tag/altinity/clickhouse-operator.svg)](https://github.com/squids-io/clickhouse-operator/tags)
 
 ## Features
 
