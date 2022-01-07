@@ -21,15 +21,13 @@ require (
 	golang.org/x/tools v0.1.5 // indirect
 	gopkg.in/d4l3k/messagediff.v1 v1.2.1
 	gopkg.in/yaml.v2 v2.4.0
-	k8s.io/api v0.21.7
-	k8s.io/apimachinery v0.21.7
-	k8s.io/client-go v0.0.0-00010101000000-000000000000
-	k8s.io/code-generator v0.0.0-00010101000000-000000000000
+	k8s.io/api v0.22.2
+	k8s.io/apimachinery v0.22.2
+	k8s.io/client-go v0.22.2
+	k8s.io/code-generator v0.21.7
 )
 
 replace (
 	k8s.io/api => k8s.io/api v0.21.7
 	k8s.io/apimachinery => k8s.io/apimachinery v0.21.7
-	k8s.io/client-go => k8s.io/client-go v0.21.7
-	k8s.io/code-generator => k8s.io/code-generator v0.21.7
 )
