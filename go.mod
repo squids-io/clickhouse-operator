@@ -27,7 +27,7 @@ require (
 	k8s.io/code-generator v0.21.7
 )
 
-replace (
-	k8s.io/api => k8s.io/api v0.21.7
-	k8s.io/apimachinery => k8s.io/apimachinery v0.21.7
-)
+//replace (
+//	k8s.io/api => k8s.io/api v0.21.7
+//	k8s.io/apimachinery => k8s.io/apimachinery v0.21.7
+//)

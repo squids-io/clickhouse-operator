@@ -746,7 +746,7 @@ func ensurePortByName(container *corev1.Container, name string, port int32) {
 	for i := range container.Ports {
 		containerPort := &container.Ports[i]
 		if containerPort.Name == name {
-			containerPort.HostPort = 0
+			//containerPort.HostPort = 0
 			containerPort.ContainerPort = port
 			return
 		}
