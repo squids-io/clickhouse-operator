@@ -110,7 +110,7 @@ func Run() {
 		chiListPath,
 	)
 
-	exporter.DiscoveryWatchedCHIs(chopClient)
+	exporter.DiscoveryWatchedCHIs(chopClient, kubeClient)
 
 	<-ctx.Done()
 }

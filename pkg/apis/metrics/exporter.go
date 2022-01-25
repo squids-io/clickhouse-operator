@@ -19,6 +19,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"strings"
 	"sync"
 	"time"
 
@@ -27,6 +28,8 @@ import (
 
 	"github.com/prometheus/client_golang/prometheus"
 	"k8s.io/apimachinery/pkg/apis/meta/v1"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	kube "k8s.io/client-go/kubernetes"
 
 	"github.com/squids-io/clickhouse-operator/pkg/chop"
 	chopclientset "github.com/squids-io/clickhouse-operator/pkg/client/clientset/versioned"
@@ -35,6 +38,8 @@ import (
 const (
 	defaultTimeout = 30 * time.Second
 )
+
+var KubeClient *kube.Clientset
 
 // Exporter implements prometheus.Collector interface
 type Exporter struct {
@@ -162,6 +167,11 @@ func (e *Exporter) updateWatched(chi *WatchedCHI) {
 
 // newFetcher returns new Metrics Fetcher for specified host
 func (e *Exporter) newFetcher(hostname string) *ClickHouseFetcher {
+	ctx := context.TODO()
+	clusterName := strings.Split(hostname, "-")[1]
+	secreteName := fmt.Sprintf("clickhouse-%s-component-user-suffix", clusterName)
+	secret, _ := KubeClient.CoreV1().Secrets("squids-user").Get(ctx, secreteName, metav1.GetOptions{})
+	e.chAccessInfo.Password = string(secret.Data["password"])
 	return NewClickHouseFetcher(
 		hostname,
 		e.chAccessInfo.Username,
@@ -295,8 +305,9 @@ func (e *Exporter) deleteWatchedCHI(w http.ResponseWriter, r *http.Request) {
 }
 
 // DiscoveryWatchedCHIs discovers all ClickHouseInstallation objects available for monitoring and adds them to watched list
-func (e *Exporter) DiscoveryWatchedCHIs(chopClient *chopclientset.Clientset) {
+func (e *Exporter) DiscoveryWatchedCHIs(chopClient *chopclientset.Clientset, kubeClient *kube.Clientset) {
 	// Get all CHI objects from watched namespace(s)
+	KubeClient = kubeClient
 	watchedNamespace := chop.Config().GetInformerNamespace()
 	list, err := chopClient.ClickhouseV1().ClickHouseInstallations(watchedNamespace).List(context.TODO(), v1.ListOptions{})
 	if err != nil {
