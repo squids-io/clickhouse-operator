@@ -166,11 +166,11 @@ func (e *Exporter) updateWatched(chi *WatchedCHI) {
 }
 
 // newFetcher returns new Metrics Fetcher for specified host
-func (e *Exporter) newFetcher(hostname string) *ClickHouseFetcher {
+func (e *Exporter) newFetcher(hostname , namespace string) *ClickHouseFetcher {
 	ctx := context.TODO()
 	clusterName := strings.Split(hostname, "-")[1]
 	secreteName := fmt.Sprintf("clickhouse-%s-component-user-suffix", clusterName)
-	secret, _ := KubeClient.CoreV1().Secrets("squids-user").Get(ctx, secreteName, metav1.GetOptions{})
+	secret, _ := KubeClient.CoreV1().Secrets(namespace).Get(ctx, secreteName, metav1.GetOptions{})
 	e.chAccessInfo.Password = string(secret.Data["password"])
 	return NewClickHouseFetcher(
 		hostname,
@@ -192,7 +192,7 @@ func (e *Exporter) UpdateWatch(namespace, chiName string, hostnames []string) {
 
 // collectFromHost collects metrics from one host and writes them into chan
 func (e *Exporter) collectFromHost(chi *WatchedCHI, hostname string, c chan<- prometheus.Metric) {
-	fetcher := e.newFetcher(hostname)
+	fetcher := e.newFetcher(hostname, chi.Namespace)
 	writer := NewPrometheusWriter(c, chi, hostname)
 
 	log.V(2).Infof("Querying metrics for %s\n", hostname)
