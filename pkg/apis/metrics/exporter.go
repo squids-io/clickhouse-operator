@@ -122,7 +122,7 @@ func (e *Exporter) enqueueToRemoveFromWatched(chi *WatchedCHI) {
 func (e *Exporter) WalkWatchedChi(f func(chi *WatchedCHI, hostname string)) {
 	// Loop over ClickHouseInstallations
 	for _, chi := range e.chInstallations {
-		// Loop over all hostnames of this installation
+		// Loop over all hostnames of tc072281c526859b0ab4f1f46872e747fb80d8d6666b5his installation
 		for _, hostname := range chi.Hostnames {
 			f(chi, hostname)
 		}
@@ -168,10 +168,12 @@ func (e *Exporter) updateWatched(chi *WatchedCHI) {
 // newFetcher returns new Metrics Fetcher for specified host
 func (e *Exporter) newFetcher(hostname , namespace string) *ClickHouseFetcher {
 	ctx := context.TODO()
-	clusterName := strings.Split(hostname, "-")[1]
+	clusterName := strings.Split(hostname, "-")[2]
 	secreteName := fmt.Sprintf("clickhouse-%s-component-user-suffix", clusterName)
 	secret, _ := KubeClient.CoreV1().Secrets(namespace).Get(ctx, secreteName, metav1.GetOptions{})
+	e.chAccessInfo.Username = "root"
 	e.chAccessInfo.Password = string(secret.Data["password"])
+	log.V(2).Infof("query password is %s\n", string(secret.Data["password"]))
 	return NewClickHouseFetcher(
 		hostname,
 		e.chAccessInfo.Username,

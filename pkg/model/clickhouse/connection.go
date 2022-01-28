@@ -116,7 +116,7 @@ func (c *Connection) QueryContext(ctx context.Context, sql string) (*QueryResult
 
 	if !c.ensureConnected(queryCtx) {
 		cancel()
-		s := fmt.Sprintf("FAILED connect(%s) for SQL: %s", c.params.GetDSNWithHiddenCredentials(), sql)
+		s := fmt.Sprintf("FAILED connect(%s) for SQL: %s", c.params.GetDSN(), sql)
 		c.l.V(1).A().Error(s)
 		return nil, fmt.Errorf(s)
 	}

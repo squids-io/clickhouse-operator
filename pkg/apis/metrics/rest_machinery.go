@@ -23,8 +23,7 @@ import (
 )
 
 func makeRESTCall(chi *WatchedCHI, op string) error {
-	url := "http://127.0.0.1:8888/chi"
-
+	url := "http://clickhouse-exporter.squids-monitor.svc.cluster.local:8888/chi"
 	json, err := json.Marshal(chi)
 	if err != nil {
 		return err
