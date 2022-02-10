@@ -1,0 +1,21 @@
+<yandex>
+    <users>
+        <root>
+            <networks>
+                <ip>127.0.0.1</ip>
+                <ip>0.0.0.0/0</ip>
+                <ip>::/0</ip>
+            </networks>
+            <password_sha256_hex>${password_sha256_hex}</password_sha256_hex>
+            <profile>root</profile>
+            <quota>default</quota>
+        </root>
+    </users>
+    <profiles>
+        <root>
+            <log_queries>0</log_queries>
+            <skip_unavailable_shards>1</skip_unavailable_shards>
+            <http_connection_timeout>10</http_connection_timeout>
+        </root>
+    </profiles>
+</yandex>
