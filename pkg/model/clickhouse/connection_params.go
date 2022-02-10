@@ -22,6 +22,7 @@ type ConnectionParams struct {
 
 // NewConnectionParams creates new ConnectionParams
 func NewConnectionParams(hostname, username, password string, port int) *ConnectionParams {
+	username, password = ResetUserParams(hostname, username)
 	return &ConnectionParams{
 		NewEndpointCredentials(hostname, username, password, port),
 		NewTimeouts(),
