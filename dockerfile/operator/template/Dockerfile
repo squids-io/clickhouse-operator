@@ -25,7 +25,7 @@ RUN OPERATOR_BIN=/tmp/clickhouse-operator ./dev/go_build_operator.sh
 # ===== Operator =====
 # ====================
 
-FROM registry.access.redhat.com/ubi7/ubi-minimal AS ubi7
+FROM swr.cn-east-2.myhuaweicloud.com/squids/ubi-minimal:latest AS ubi7
 RUN microdnf update && microdnf clean all
 
 MAINTAINER "Altinity <support@altinity.com>"
