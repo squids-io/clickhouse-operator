@@ -139,7 +139,8 @@ func (c *Controller) deleteStatefulSet(ctx context.Context, host *chop.ChiHost) 
 
 	// Scale StatefulSet down to 0 pods count.
 	// This is the proper and graceful way to delete StatefulSet
-	_ = c.RunClickhouseStop(ctx, host)
+	// TODO stop
+	// _ = c.RunClickhouseStop(ctx, host)
 	var zero int32 = 0
 	host.StatefulSet.Spec.Replicas = &zero
 	if _, err := c.kubeClient.AppsV1().StatefulSets(namespace).Update(ctx, host.StatefulSet, newUpdateOptions()); err != nil {

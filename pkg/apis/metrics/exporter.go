@@ -166,7 +166,7 @@ func (e *Exporter) updateWatched(chi *WatchedCHI) {
 }
 
 // newFetcher returns new Metrics Fetcher for specified host
-func (e *Exporter) newFetcher(hostname , namespace string) *ClickHouseFetcher {
+func (e *Exporter) newFetcher(hostname, namespace string) *ClickHouseFetcher {
 	ctx := context.TODO()
 	clusterName := strings.Split(hostname, "-")[2]
 	secreteName := fmt.Sprintf("clickhouse-%s-component-user-suffix", clusterName)
@@ -265,6 +265,13 @@ func (e *Exporter) collectFromHost(chi *WatchedCHI, hostname string, c chan<- pr
 		// In case of an error fetching data from clickhouse store CHI name in e.cleanup
 		log.V(2).Infof("Error querying detached parts for %s: %s\n", hostname, err)
 		writer.WriteErrorFetch("system.detached_parts")
+	}
+	log.V(2).Infof("Querying clickhouse up for %s\n", chi.Hostnames)
+	if req, err := fetcher.getHostnameStatus(chi); err == nil {
+		log.V(2).Infof("Querying clickhouse up for %s, Status is %s \n", hostname, req)
+		writer.WriteClickhouseUp(req)
+	} else {
+		log.V(2).Infof("Querying clickhouse up for %s Failed: err %s  \n", hostname, err)
 	}
 }
 

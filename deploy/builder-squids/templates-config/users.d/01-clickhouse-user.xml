@@ -9,6 +9,7 @@
             <password_sha256_hex>${password_sha256_hex}</password_sha256_hex>
             <profile>root</profile>
             <quota>default</quota>
+            <access_management>1</access_management>
         </root>
     </users>
     <profiles>

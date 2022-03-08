@@ -6,6 +6,7 @@ import (
 	"fmt"
 	log "github.com/squids-io/clickhouse-operator/pkg/announcer"
 	chop "github.com/squids-io/clickhouse-operator/pkg/apis/clickhouse.altinity.com/v1"
+	chiopConfig "github.com/squids-io/clickhouse-operator/pkg/chop"
 	chopmodel "github.com/squids-io/clickhouse-operator/pkg/model"
 	"github.com/squids-io/clickhouse-operator/pkg/util"
 	apps "k8s.io/api/apps/v1"
@@ -17,8 +18,6 @@ import (
 	kubeclientcmd "k8s.io/client-go/tools/clientcmd"
 	"k8s.io/client-go/tools/remotecommand"
 	"net/http"
-
-	//"net/http"
 	"os"
 	"os/user"
 	"path/filepath"
@@ -34,8 +33,10 @@ func (c *Controller) RunClickhouseStop(ctx context.Context, host *chop.ChiHost) 
 	name := chopmodel.CreateStatefulSetName(host)
 	podName := fmt.Sprintf("%s-%d", name, 0)
 	namespace := host.Address.Namespace
+	log.V(1).M(host).Info("Start push metadata %s", podName)
+	_ = c.pushMetadata(host, namespace, podName)
 	// removeLivenessProbeProb
-	log.V(1).M(host).Error("Start remove pod %s liveness Probe", podName)
+	log.V(1).M(host).Info("Start remove pod %s liveness Probe", podName)
 	portName, err := c.removeProbeProb(ctx, host, name, namespace)
 	if err != nil {
 		return err
@@ -49,27 +50,28 @@ func (c *Controller) RunClickhouseStop(ctx context.Context, host *chop.ChiHost) 
 		}
 	}
 	podHost := host.StatefulSet.Spec.ServiceName
-	log.V(1).M(host).Error("start poll Probe %s", podName)
+	log.V(1).M(host).Info("start poll Probe %s", podName)
 	podHost1 := fmt.Sprintf("%s.%s.svc.cluster.local", podHost, namespace)
-	log.V(1).M(host).Error("hostName is %s", podHost1)
-	if pollLivenessProbe(podHost1, livenessPort) {
-		log.V(1).M(host).Error("Probe remove Success %s", podName)
+	log.V(1).M(host).Info("hostName is %s", podHost1)
+	if pollLivenessProbe(podHost1, livenessPort, nil) {
+		log.V(1).M(host).Info("Probe remove Success %s", podName)
 		_ = c.runStop(host, namespace, podName)
-	}
-	if c.checkContainerStatus(ctx, namespace, podName) {
-		log.V(1).M(host).Info("Clickhouse %s is Completed", podName)
-		var zero int32 = 0
-		host.StatefulSet.Spec.Replicas = &zero
-		host.StatefulSet.ResourceVersion = ""
-		if _, err = c.kubeClient.AppsV1().StatefulSets(namespace).Update(ctx, host.StatefulSet, newUpdateOptions()); err != nil {
-			log.V(1).M(host).Error("CHI_EXTEND UNABLE to update StatefulSet %s/%s, err: %s", namespace, name, err)
-			return err
+		if c.checkContainerStatus(ctx, namespace, podName, nil) {
+			log.V(1).M(host).Info("Clickhouse %s is Completed", podName)
+			var zero int32 = 0
+			host.StatefulSet.Spec.Replicas = &zero
+			host.StatefulSet.ResourceVersion = ""
+			if _, err = c.kubeClient.AppsV1().StatefulSets(namespace).Update(ctx, host.StatefulSet, newUpdateOptions()); err != nil {
+				log.V(1).M(host).Error("CHI_EXTEND UNABLE to update StatefulSet %s/%s, err: %s", namespace, name, err)
+				return err
+			}
 		}
 	}
+
 	return nil
 }
 
-func (c *Controller) runStop(host *chop.ChiHost, namespace string, podName string) error{
+func (c *Controller) runStop(host *chop.ChiHost, namespace string, podName string) error {
 	cmd := []string{
 		"/bin/sh",
 		"-c",
@@ -80,6 +82,23 @@ func (c *Controller) runStop(host *chop.ChiHost, namespace string, podName strin
 	if err != nil {
 		// err中添加报错信息
 		log.V(1).M(host).Error("UNABLE Stop Clickhouse %s/%s, err: %s/%s", namespace, podName, stdErr, err)
+		return err
+	}
+	log.V(1).M(host).E().Info(stdOut)
+	return err
+}
+
+func (c *Controller) pushMetadata(host *chop.ChiHost, namespace string, podName string) error {
+	cmd := []string{
+		"/bin/sh",
+		"-c",
+		"/chi/sync.sh",
+	}
+	log.V(1).M(host).E().Info(fmt.Sprintf("Push Clickhouse %s/%s", namespace, podName))
+	stdOut, stdErr, err := c.Exec(namespace, podName, "sync", cmd)
+	if err != nil {
+		// err中添加报错信息
+		log.V(1).M(host).Error("UNABLE Push Clickhouse %s/%s, err: %s/%s", namespace, podName, stdErr, err)
 		return err
 	}
 	log.V(1).M(host).E().Info(stdOut)
@@ -109,7 +128,9 @@ func (c *Controller) removeProbeProb(ctx context.Context, host *chop.ChiHost, na
 	return portName, nil
 }
 
-func (c *Controller) checkContainerStatus(ctx context.Context, namespace string, podName string) bool {
+func (c *Controller) checkContainerStatus(ctx context.Context, namespace string, podName string, opts *StatefulSetPollOptions) bool {
+	opts = opts.Ensure().FromConfig(chiopConfig.Config())
+	start := time.Now()
 	for {
 		time.Sleep(3 * time.Second)
 		pod, _ := c.kubeClient.CoreV1().Pods(namespace).Get(ctx, podName, metav1.GetOptions{})
@@ -120,14 +141,20 @@ func (c *Controller) checkContainerStatus(ctx context.Context, namespace string,
 				}
 			}
 		}
-
+		if time.Since(start) >= opts.Timeout {
+			// Timeout reached, no good result available, time to quit
+			log.V(1).E().Error("Check Clickhouse Status %s- TIMEOUT reached", podName)
+			return false
+		}
 	}
 }
 
-func pollLivenessProbe(host string, livenessPort int32) bool {
+func pollLivenessProbe(host string, livenessPort int32, opts *StatefulSetPollOptions) bool {
+	opts = opts.Ensure().FromConfig(chiopConfig.Config())
+	start := time.Now()
 	for {
 		time.Sleep(10 * time.Second)
-		log.V(1).E().Info("Start Check Live Probe[ http://%s:%d/ping ]------------", host, livenessPort)
+		log.V(1).Info("Check Live Probe[ http://%s:%d/ping ]", host, livenessPort)
 		resp, _ := http.Get(fmt.Sprintf("http://%s:%d/ping", host, livenessPort))
 		if resp == nil {
 			continue
@@ -135,6 +162,11 @@ func pollLivenessProbe(host string, livenessPort int32) bool {
 		defer resp.Body.Close()
 		if resp.Status == "200 OK" {
 			return true
+		}
+		if time.Since(start) >= opts.Timeout {
+			// Timeout reached, no good result available, time to quit
+			log.V(1).E().Error("Check Live Probe %s/%s - TIMEOUT reached", host, livenessPort)
+			return false
 		}
 	}
 }
@@ -170,15 +202,11 @@ func (c *Controller) Exec(namespace string, podName string, containerName string
 		Tty:    false,
 	})
 	log.Info(fmt.Sprintf("exec err: %v", err))
-	//log.Info(fmt.Sprintf("stdout: %s", execOut.String()))
 	log.V(1).Info(fmt.Sprintf("stdErr: %s", execErr.String()))
 	log.V(1).Info(fmt.Sprintf("stdOut: %s", execOut.String()))
 	if err != nil {
 		return "", execErr.String(), err
 	}
-	//if execErr.Len() > 0 {
-	//	return "", execErr.String(), err
-	//}
 	return execOut.String(), execErr.String(), nil
 }
 

@@ -21,9 +21,14 @@ endef
 
 # build clickhouse-exporter
 define clickhouse-exporter-image
-docker build --platform linux/amd64  -t  $(REPO_HOST)/zyz_k8s//clickhouse-exporter:$(RELEASE_VERSION)  -f ./dockerfile/metrics-exporter/Dockerfile  .
-# docker push $(REPO_HOST)/squids/clickhouse-exporter:$(RELEASE_VERSION)
+docker build --platform linux/amd64  -t  $(REPO_HOST)/$(REPO_USER)/clickhouse-exporter:$(RELEASE_VERSION)  -f ./dockerfile/metrics-exporter/Dockerfile  .
+docker push $(REPO_HOST)/$(REPO_USER)/clickhouse-exporter:$(RELEASE_VERSION)
 endef
 
+.PHONY: clickhouse-operator
 clickhouse-operator:
 	$(clickhouse-operator-image)
+
+.PHONY: clickhouse-exporter
+clickhouse-exporter:
+	$(clickhouse-exporter-image)
