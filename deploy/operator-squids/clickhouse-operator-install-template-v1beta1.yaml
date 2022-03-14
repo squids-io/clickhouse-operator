@@ -3541,6 +3541,10 @@ data:
             <flush_interval_milliseconds>7500</flush_interval_milliseconds>
         </part_log>
     </yandex>
+  01-clickhouse-05-timezone.xml: |
+    <yandex>
+        <timezone>Asia/Shanghai</timezone>
+    </yandex>
 ---
 # Template Parameters:
 #
@@ -3595,6 +3599,10 @@ data:
             <engine>Engine = MergeTree PARTITION BY event_date ORDER BY event_time TTL event_date + interval 30 day</engine>
             <flush_interval_milliseconds>7500</flush_interval_milliseconds>
         </part_log>
+    </yandex>
+  01-clickhouse-05-timezone.xml: |
+    <yandex>
+        <timezone>Asia/Shanghai</timezone>
     </yandex>
 ---
 # Template Parameters:
