@@ -267,7 +267,7 @@ func (e *Exporter) collectFromHost(chi *WatchedCHI, hostname string, c chan<- pr
 		writer.WriteErrorFetch("system.detached_parts")
 	}
 	log.V(2).Infof("Querying clickhouse up for %s\n", chi.Hostnames)
-	if req, err := fetcher.getHostnameStatus(chi); err == nil {
+	if req, err := fetcher.getHostnameStatus(hostname); err == nil {
 		log.V(2).Infof("Querying clickhouse up for %s, Status is %s \n", hostname, req)
 		writer.WriteClickhouseUp(req)
 	} else {
