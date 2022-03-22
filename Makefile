@@ -1,6 +1,6 @@
 
 ifndef RELEASE_VERSION
-RELEASE_VERSION := dev
+RELEASE_VERSION := v1.0.0
 endif
 
 ifndef REPO_HOST

@@ -4,11 +4,12 @@ import (
 	"fmt"
 	"github.com/prometheus/client_golang/prometheus"
 	"net/http"
+	"strings"
 )
 
 func (w *PrometheusWriter) WriteClickhouseUp(req string) {
-	writeSingleMetricToPrometheus(w.out, "clickhouse_up", "status of chi", req, prometheus.GaugeValue, []string{"chi", "namespace", "hostname"},
-		w.chi.Name, w.chi.Namespace, w.hostname)
+	writeSingleMetricToPrometheus(w.out, "clickhouse_up", "status of chi", req, prometheus.GaugeValue, []string{"chi", "namespace", "hostname", "target"},
+		w.chi.Name, w.chi.Namespace, w.hostname, strings.Replace(w.chi.Name, "clickhouse", "squids", -1))
 }
 
 func (f *ClickHouseFetcher) getHostnameStatus(hostname string) (string, error) {

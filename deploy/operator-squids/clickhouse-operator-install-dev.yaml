@@ -10,7 +10,7 @@ kind: CustomResourceDefinition
 metadata:
   name: clickhouseinstallations.clickhouse.altinity.com
   labels:
-    clickhouse.altinity.com/chop: dev
+    clickhouse.altinity.com/chop: v1.0.0
 spec:
   group: clickhouse.altinity.com
   scope: Namespaced
@@ -1339,7 +1339,7 @@ kind: CustomResourceDefinition
 metadata:
   name: clickhouseinstallationtemplates.clickhouse.altinity.com
   labels:
-    clickhouse.altinity.com/chop: dev
+    clickhouse.altinity.com/chop: v1.0.0
 spec:
   group: clickhouse.altinity.com
   scope: Namespaced
@@ -2665,7 +2665,7 @@ kind: CustomResourceDefinition
 metadata:
   name: clickhouseoperatorconfigurations.clickhouse.altinity.com
   labels:
-    clickhouse.altinity.com/chop: dev
+    clickhouse.altinity.com/chop: v1.0.0
 spec:
   group: clickhouse.altinity.com
   scope: Namespaced
@@ -2866,7 +2866,7 @@ metadata:
   name: clickhouse-operator
   namespace: dev
   labels:
-    clickhouse.altinity.com/chop: dev
+    clickhouse.altinity.com/chop: v1.0.0
 # ---
 ---
 # Template Parameters:
@@ -2882,7 +2882,7 @@ metadata:
   name: clickhouse-exporter
   namespace: squids-monitor
   labels:
-    clickhouse.altinity.com/chop: dev
+    clickhouse.altinity.com/chop: v1.0.0
 
 ---
 # Template Parameters:
@@ -2900,7 +2900,7 @@ metadata:
   name: clickhouse-operator-dev
   #namespace: dev
   labels:
-    clickhouse.altinity.com/chop: dev
+    clickhouse.altinity.com/chop: v1.0.0
 rules:
 - apiGroups:
     - ""
@@ -3056,7 +3056,7 @@ metadata:
   name: clickhouse-operator-dev
   #namespace: dev
   labels:
-    clickhouse.altinity.com/chop: dev
+    clickhouse.altinity.com/chop: v1.0.0
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -3074,7 +3074,7 @@ metadata:
   name: clickhouse-operator-squids-monitor
   #namespace: squids-monitor
   labels:
-    clickhouse.altinity.com/chop: dev
+    clickhouse.altinity.com/chop: v1.0.0
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -3097,7 +3097,7 @@ metadata:
   name: etc-clickhouse-operator-files
   namespace: dev
   labels:
-    clickhouse.altinity.com/chop: dev
+    clickhouse.altinity.com/chop: v1.0.0
     app: clickhouse-operator
 data:
   config.yaml: |
@@ -3296,7 +3296,7 @@ metadata:
   name: etc-clickhouse-exporter-files
   namespace: squids-monitor
   labels:
-    clickhouse.altinity.com/chop: dev
+    clickhouse.altinity.com/chop: v1.0.0
     app: clickhouse-operator
 data:
   config.yaml: |
@@ -3495,7 +3495,7 @@ metadata:
   name: etc-clickhouse-operator-confd-files
   namespace: dev
   labels:
-    clickhouse.altinity.com/chop: dev
+    clickhouse.altinity.com/chop: v1.0.0
     app: clickhouse-operator
 data:
 ---
@@ -3511,7 +3511,7 @@ metadata:
   name: etc-clickhouse-exporter-confd-files
   namespace: squids-monitor
   labels:
-    clickhouse.altinity.com/chop: dev
+    clickhouse.altinity.com/chop: v1.0.0
     app: clickhouse-operator
 data:
 ---
@@ -3527,7 +3527,7 @@ metadata:
   name: etc-clickhouse-operator-configd-files
   namespace: dev
   labels:
-    clickhouse.altinity.com/chop: dev
+    clickhouse.altinity.com/chop: v1.0.0
     app: clickhouse-operator
 data:
   01-clickhouse-01-listen.xml: |
@@ -3591,7 +3591,7 @@ metadata:
   name: etc-clickhouse-exporter-configd-files
   namespace: squids-monitor
   labels:
-    clickhouse.altinity.com/chop: dev
+    clickhouse.altinity.com/chop: v1.0.0
     app: clickhouse-operator
 data:
   01-clickhouse-01-listen.xml: |
@@ -3655,7 +3655,7 @@ metadata:
   name: etc-clickhouse-operator-templatesd-files
   namespace: dev
   labels:
-    clickhouse.altinity.com/chop: dev
+    clickhouse.altinity.com/chop: v1.0.0
     app: clickhouse-operator
 data:
   001-templates.json.example: |
@@ -3755,7 +3755,7 @@ metadata:
   name: etc-clickhouse-exporter-templatesd-files
   namespace: squids-monitor
   labels:
-    clickhouse.altinity.com/chop: dev
+    clickhouse.altinity.com/chop: v1.0.0
     app: clickhouse-operator
 data:
   001-templates.json.example: |
@@ -3855,7 +3855,7 @@ metadata:
   name: etc-clickhouse-operator-usersd-files
   namespace: dev
   labels:
-    clickhouse.altinity.com/chop: dev
+    clickhouse.altinity.com/chop: v1.0.0
     app: clickhouse-operator
 data:
   01-clickhouse-user.xml: |
@@ -3915,7 +3915,7 @@ metadata:
   name: etc-clickhouse-exporter-usersd-files
   namespace: squids-monitor
   labels:
-    clickhouse.altinity.com/chop: dev
+    clickhouse.altinity.com/chop: v1.0.0
     app: clickhouse-operator
 data:
   01-clickhouse-user.xml: |
@@ -3967,8 +3967,8 @@ data:
 #
 # NAMESPACE=dev
 # COMMENT=
-# OPERATOR_IMAGE=swr.cn-east-2.myhuaweicloud.com/squids/clickhouse-operator:dev
-# METRICS_EXPORTER_IMAGE=swr.cn-east-2.myhuaweicloud.com/squids/clickhouse-exporter:dev
+# OPERATOR_IMAGE=swr.cn-east-2.myhuaweicloud.com/squids/clickhouse-operator:v1.0.0
+# METRICS_EXPORTER_IMAGE=swr.cn-east-2.myhuaweicloud.com/squids/clickhouse-exporter:v1.0.0
 #
 # Setup Deployment for clickhouse-operator
 # Deployment would be created in kubectl-specified namespace
@@ -3978,7 +3978,7 @@ metadata:
   name: clickhouse-operator
   namespace: dev
   labels:
-    clickhouse.altinity.com/chop: dev
+    clickhouse.altinity.com/chop: v1.0.0
     app: clickhouse-operator
 spec:
   replicas: 1
@@ -4012,7 +4012,7 @@ spec:
             name: etc-clickhouse-operator-usersd-files
       containers:
         - name: clickhouse-operator
-          image: swr.cn-east-2.myhuaweicloud.com/squids/clickhouse-operator:dev
+          image: swr.cn-east-2.myhuaweicloud.com/squids/clickhouse-operator:v1.0.0
           imagePullPolicy: Always
           volumeMounts:
             - name: etc-clickhouse-operator-folder
@@ -4086,7 +4086,7 @@ spec:
 #
 # NAMESPACE=squids-monitor
 # COMMENT=
-# METRICS_EXPORTER_IMAGE=swr.cn-east-2.myhuaweicloud.com/squids/clickhouse-exporter:dev
+# METRICS_EXPORTER_IMAGE=swr.cn-east-2.myhuaweicloud.com/squids/clickhouse-exporter:v1.0.0
 #
 # Setup Deployment for clickhouse-exporter
 # Deployment would be created in kubectl-specified namespace
@@ -4096,7 +4096,7 @@ metadata:
   name: clickhouse-exporter
   namespace: squids-monitor
   labels:
-    clickhouse.altinity.com/chop: dev
+    clickhouse.altinity.com/chop: v1.0.0
     app: clickhouse-exporer
 spec:
   replicas: 1
@@ -4132,7 +4132,7 @@ spec:
         node-role.kubernetes.io/master: ""
       containers:
         - name: metrics-exporter
-          image: swr.cn-east-2.myhuaweicloud.com/squids/clickhouse-exporter:dev
+          image: swr.cn-east-2.myhuaweicloud.com/squids/clickhouse-exporter:v1.0.0
           imagePullPolicy: Always
           volumeMounts:
             - name: etc-clickhouse-exporter-folder
@@ -4166,7 +4166,7 @@ metadata:
   name: clickhouse-exporter
   namespace: squids-monitor
   labels:
-    clickhouse.altinity.com/chop: dev
+    clickhouse.altinity.com/chop: v1.0.0
     app: clickhouse-operator
 spec:
   ports:
